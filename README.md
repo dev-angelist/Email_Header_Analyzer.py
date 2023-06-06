@@ -19,7 +19,6 @@
 ██╔══██║██║╚████║██╔══██║██║░░░░░░░╚██╔╝░░██╔══╝░░██╔══╝░░██╔══██╗
 ██║░░██║██║░╚███║██║░░██║███████╗░░░██║░░░███████╗███████╗██║░░██║
 ╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝╚══════╝░░░╚═╝░░░╚══════╝╚══════╝╚═╝░░╚═╝
-╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝╚══════╝░░░╚═╝░░░╚══════╝╚══════╝╚═╝░░╚═╝
 
 
 The program is a Python script that verifies the DMARC alignment of an email header. It takes an email file as input and checks if the DMARC alignment is valid or invalid based on the presence of the "Authentication-Results" header field in the email and the value of the "dmarc" tag.
