@@ -1,0 +1,50 @@
+import argparse
+import email
+
+
+def parse_email_header(file_path):
+    # Function to parse the email header and return a Message object
+    with open(file_path, 'r') as f:
+        msg = email.message_from_file(f)
+
+    return msg
+
+
+def verify_dmarc_alignment(msg):
+    # Function to verify the DMARC alignment of the email
+    dmarc_record = msg.get('Authentication-Results')
+    if dmarc_record:
+        if "dmarc=pass" in dmarc_record:
+            return True  # DMARC alignment is valid
+        else:
+            return False  # DMARC alignment is invalid
+
+    return False  # DMARC record is not present
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Email DMARC alignment verification.')
+    parser.add_argument('file', help='Path to the email file')
+
+    args = parser.parse_args()
+
+    file_path = args.file
+
+    try:
+        msg = parse_email_header(file_path)  # Parse the email header
+
+        is_valid_dmarc_alignment = verify_dmarc_alignment(msg)  # Verify DMARC alignment
+
+        if is_valid_dmarc_alignment:
+            print("DMARC alignment is valid.")
+        else:
+            print("DMARC alignment is invalid.")
+
+    except FileNotFoundError:
+        print(f"File '{file_path}' not found.")
+    except email.errors.MessageError:
+        print("Invalid email file.")
+
+
+if __name__ == '__main__':
+    main()
